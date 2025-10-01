@@ -15,7 +15,7 @@ try:
 except ImportError:
     json_parser = json
 
-FILE = Path("d4.txt")
+FILE = Path("csf/ELK_TAL_Pro.txt")
 HDR  = re.compile(r"^#\s*\d+:\s*GET\s+(\S+)\s+\d+\s*\w*", re.I)
 
 def clean(text: str) -> str:
@@ -39,7 +39,7 @@ def load_routes(fp: Path) -> Dict[str, Any]:
                 if cur and buf:
                     try:
                         json_content = clean("\n".join(buf))
-                        # print(json_content)
+                        
                         routes[cur] = json_parser.loads(json_content)
                         logger.info(f"Loaded route {cur}")
                     except (json.JSONDecodeError, Exception) as e:
@@ -79,6 +79,7 @@ def create_endpoint(endpoint_payload: Any):
 
 # Load routes and create endpoints
 try:
+    print(FILE.resolve())
     routes = load_routes(FILE)
     if not routes:
         logger.warning("No routes loaded from file")
