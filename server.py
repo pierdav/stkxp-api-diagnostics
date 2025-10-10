@@ -15,7 +15,7 @@ try:
 except ImportError:
     json_parser = json
 
-FILE = Path("csf/ELK_TAL_Pro.txt")
+FILE = Path("test_output.txt")
 HDR  = re.compile(r"^#\s*\d+:\s*GET\s+(\S+)\s+\d+\s*\w*", re.I)
 
 def clean(text: str) -> str:
